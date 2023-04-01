@@ -47,16 +47,29 @@ const Home= () =>{
             "description": descGet,
             "progress": 1
             };            
-            data["data"].push(object);
-            console.log(data["data"]);
+            // data["data"].push(object);
+            // console.log(data["data"]);
+            fetch("http://64.227.168.53:5000/api/create", {
+                method: "POST",
+                body: JSON.stringify(object),
+                headers: {
+                   "Content-Type": "application/json"
+                }
+             })
+             .then(()=> fetch("http://64.227.168.53:5000/api/read", {mode:'cors'})
+             .then(response => {
+                 return response.json()
+             })
+         
+             .then(data => {
+                 setData(data);
+                 setFilteredData(data);
+             }))
+             
+            
+        
     }
-    fetch("http://64.227.168.53:5000/api/read", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-           "Content-type": "application/json; charset=UTF-8"
-        }
-     })
+    
 
     return (
         <div className="mainHome">
@@ -103,6 +116,7 @@ const Home= () =>{
                             </div>
                             <div className="contentDiv">
                                 <p>{pRec.description}</p>
+                                <p className="italic">{pRec.quote}</p>
                             </div>
                             <div className="deadlineTask">
                                 <h3>{pRec.type}</h3>

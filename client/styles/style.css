@@ -85,7 +85,8 @@ body {
 
 .taskHolder {
     display: flex;
-    
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .task {
@@ -142,4 +143,8 @@ body {
     color: rgb(255, 255, 255);
     font-size: 1rem;
     
+}
+
+.italic {
+    font-style: italic;
 }

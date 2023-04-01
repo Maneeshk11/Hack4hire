@@ -25,16 +25,16 @@ collection = db["mycollection"]
 #         printf(change)
 
 collection.delete_many({})
+
 unique_id = str(uuid.uuid4())
 my_data = {
         "id": unique_id,
-        "title": "title",
-        "description": "desc",
-        "duration": "duration",
-        "date": "date",
-        "deadline": "deadline",
-        "type": "event"
-    
+        'title' :  'Gym',
+        'description' : 'Hit the Gym',
+        'date' : "2023-04-01",
+        'duration' : '2',
+        'deadline' : "2023-04-01",
+        'type' : 'Personal'
 }
 
 
@@ -42,14 +42,13 @@ collection.insert_one(my_data)
 unique_id = str(uuid.uuid4())
 my_data = {
         "id": unique_id,
-        "title": "title",
-        "description": "desc",
-        "duration": "duration",
-        "date": "date",
-        "deadline": "deadline",
-        "type": "event"
+        'title' :  'Machine Learning Project',
+        'description' : 'Implementing exchange rate prediction using different regression models and choosing the best from them',
+        'date' : "2023-04-01",
+        'duration' : '8',
+        'deadline' : "2023-04-10",
+        'type' : 'Personal'
 }
-
 
 collection.insert_one(my_data)
 
@@ -63,13 +62,14 @@ def route():
 def create():
     data = request.json
     unique_id = str(uuid.uuid4())
+    deadline = datetime.strptime(data["deadline"], "%Y-%m-%d")
     my_data = {   
                     "id": unique_id,
                     "title": data["title"],
                     "description": data["description"],
                     "duration": data["duration"],
-                    "date": data["date"],
-                    "deadline": data["deadline"],
+                    "date": datetime.today().replace(microsecond=0),
+                    "deadline": deadline,
                     "type": data["type"]
                 }
     collection.insert_one(my_data)

@@ -29,3 +29,4 @@ not be in existing progress trackers.
 * Real-time collaboration
 * Real-time progress tracking
 * Integrate to Google Calendar
+* Chat-Gpt integration
